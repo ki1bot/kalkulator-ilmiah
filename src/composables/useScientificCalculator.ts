@@ -3,10 +3,10 @@ import {
   calculate,
   formatNumber,
   type AngleMode,
-  type CalculatorButton,
   type ButtonKind,
+  type CalculatorButton,
   type HistoryItem,
-} from "../utils";
+} from "../utils/scientificCalculator";
 
 export const useScientificCalculator = () => {
   const expression = ref("0");
@@ -357,7 +357,6 @@ export const useScientificCalculator = () => {
   return {
     expression,
     angleMode,
-    memory,
     history,
     errorMessage,
     lastAnswer,

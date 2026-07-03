@@ -3,7 +3,7 @@ import type {
   OperatorToken,
   PostfixToken,
   Token,
-} from "../types";
+} from "../types/calculator";
 
 export const isOperatorToken = (token: Token): token is OperatorToken => {
   return token.type === "operator";

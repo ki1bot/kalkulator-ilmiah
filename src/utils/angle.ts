@@ -1,4 +1,4 @@
-import type { AngleMode } from "../types";
+import type { AngleMode } from "../types/calculator";
 
 export const toRadians = (value: number, mode: AngleMode) => {
   return mode === "DEG" ? (value * Math.PI) / 180 : value;

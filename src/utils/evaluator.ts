@@ -1,4 +1,4 @@
-import type { AngleMode, Token } from "../types";
+import type { AngleMode, Token } from "../types/calculator";
 import { factorial } from "./factorial";
 import { applyFunction, ensureFinite } from "./mathFunctions";
 import {

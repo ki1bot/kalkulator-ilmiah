@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useScientificCalculator } from "../../composables/useScientificCalculator";
+import { useScientificCalculator } from "../composables/useScientificCalculator";
 import CalculatorDisplay from "./CalculatorDisplay.vue";
 import CalculatorKeypad from "./CalculatorKeypad.vue";
 import FeaturePanel from "./FeaturePanel.vue";

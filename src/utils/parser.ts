@@ -1,4 +1,4 @@
-import type { FunctionToken, OperatorToken, Token } from "../types";
+import type { FunctionToken, OperatorToken, Token } from "../types/calculator";
 import { isRightAssociative, precedence } from "./operators";
 import { isFunctionToken, isOperatorToken } from "./tokenGuards";
 

@@ -1,4 +1,4 @@
-import type { FunctionName } from "../types";
+import type { FunctionName } from "../types/calculator";
 
 export const functionNames: FunctionName[] = [
   "sin",

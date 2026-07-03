@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { HistoryItem } from "../../types/calculator";
+import type { HistoryItem } from "../types/calculator";
 
 defineProps<{
   history: HistoryItem[];

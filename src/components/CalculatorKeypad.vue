@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { calculatorButtons } from "../../data/calculatorButtons";
-import type { ButtonKind, CalculatorButton } from "../../types/calculator";
+import { calculatorButtons } from "../data/calculatorButtons";
+import type { ButtonKind, CalculatorButton } from "../types/calculator";
 
 const emit = defineEmits<{
   press: [button: CalculatorButton];

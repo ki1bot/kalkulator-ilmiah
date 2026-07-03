@@ -6,7 +6,7 @@ import type {
   OperatorSymbol,
   OperatorToken,
   Token,
-} from "../types";
+} from "../types/calculator";
 import { functionNames } from "./constants";
 import { isValueEndingToken, isValueStartingToken } from "./tokenGuards";
 

@@ -1,4 +1,4 @@
-import type { OperatorSymbol, PostfixSymbol } from "../types";
+import type { OperatorSymbol, PostfixSymbol } from "../types/calculator";
 
 export const precedence = (operator: OperatorSymbol | PostfixSymbol) => {
   switch (operator) {

@@ -1,4 +1,4 @@
-import type { AngleMode, FunctionName } from "../types";
+import type { AngleMode, FunctionName } from "../types/calculator";
 import { fromRadians, toRadians } from "./angle";
 
 export const ensureFinite = (value: number) => {

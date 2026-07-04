@@ -1,22 +1,43 @@
-export type FeatureCard = {
-  title: string;
-  description: string;
-};
+import type { FeatureCard } from "../types/calculator";
 
 export const featureCards: FeatureCard[] = [
   {
-    title: "Operasi matematika",
-    description:
-      "Tambah, kurang, kali, bagi, pangkat, modulo, persentase, faktorial, dan tanda kurung.",
+    title: "Perhitungan dasar",
+    description: "Cocok untuk operasi matematika umum.",
+    points: [
+      "Tambah, kurang, kali, bagi",
+      "Kurung bertingkat",
+      "Modulo dan persentase",
+    ],
   },
   {
-    title: "Fungsi ilmiah",
+    title: "Mode ilmiah",
     description:
-      "sin, cos, tan, inverse trigonometri, log, ln, exp, akar, mutlak, pembulatan, floor, dan ceil.",
+      "Mendukung fungsi yang biasa dipakai di kalkulator scientific.",
+    points: [
+      "Trigonometri dan inverse trigonometri",
+      "Logaritma dan eksponen",
+      "Akar, pangkat, faktorial",
+    ],
   },
   {
-    title: "Input keyboard",
+    title: "Kontrol hasil",
     description:
-      "Angka, operator, Enter, Backspace, dan Escape bisa langsung dipakai dari keyboard.",
+      "Pengguna bisa membaca dan memakai ulang hasil dengan lebih mudah.",
+    points: [
+      "Riwayat perhitungan",
+      "Last answer",
+      "Memory clear, recall, add, subtract",
+    ],
+  },
+  {
+    title: "Validasi input",
+    description:
+      "Kesalahan perhitungan ditangani supaya hasil tidak asal keluar.",
+    points: [
+      "Pembagian nol ditolak",
+      "Log bilangan negatif ditolak",
+      "Tan 90° ditandai tidak terdefinisi",
+    ],
   },
 ];

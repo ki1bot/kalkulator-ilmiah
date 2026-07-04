@@ -16,10 +16,36 @@ export type CalculatorButton = {
   action?: string;
 };
 
+export type CalculatorButtonGroup = {
+  title: string;
+  description: string;
+  buttons: CalculatorButton[];
+};
+
 export type HistoryItem = {
   expression: string;
   result: string;
   mode: AngleMode;
+};
+
+export type FeatureCard = {
+  title: string;
+  description: string;
+  points: string[];
+};
+
+export type ExampleCalculation = {
+  title: string;
+  expression: string;
+  result: string;
+  description: string;
+};
+
+export type ReferenceItem = {
+  title: string;
+  syntax: string;
+  description: string;
+  example: string;
 };
 
 export type OperatorSymbol = "+" | "-" | "×" | "÷" | "^" | "mod" | "neg";

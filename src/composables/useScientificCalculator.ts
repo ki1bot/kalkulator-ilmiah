@@ -135,7 +135,7 @@ export const useScientificCalculator = () => {
         mode: angleMode.value,
       });
 
-      history.value = history.value.slice(0, 8);
+      history.value = history.value.slice(0, 10);
     } catch (error) {
       errorMessage.value =
         error instanceof Error ? error.message : "Perhitungan tidak valid";
@@ -283,6 +283,12 @@ export const useScientificCalculator = () => {
     justCalculated.value = true;
   };
 
+  const loadExpression = (value: string) => {
+    expression.value = value;
+    errorMessage.value = "";
+    justCalculated.value = false;
+  };
+
   const handleKeyboard = (event: KeyboardEvent) => {
     const target = event.target;
 
@@ -365,5 +371,6 @@ export const useScientificCalculator = () => {
     handleButtonClick,
     clearHistory,
     selectHistoryResult,
+    loadExpression,
   };
 };

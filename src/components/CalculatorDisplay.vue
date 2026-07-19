@@ -64,23 +64,5 @@ const handleInput = (event: Event) => {
       @keydown.enter.prevent="emit('calculate')"
       @keydown.esc.prevent="emit('clear')"
     />
-
-    <div
-      class="mt-3 flex min-h-8 flex-col justify-between gap-1 border-t border-zinc-700 pt-3 sm:flex-row sm:items-center sm:gap-3"
-    >
-      <p
-        class="text-xs"
-        :class="errorMessage ? 'font-semibold text-rose-300' : 'text-zinc-400'"
-        aria-live="polite"
-      >
-        {{
-          errorMessage || statusMessage || "Tekan Enter atau = untuk menghitung"
-        }}
-      </p>
-
-      <p class="shrink-0 text-right font-mono text-sm font-bold text-blue-300">
-        {{ preview ? `= ${preview}` : "" }}
-      </p>
-    </div>
   </section>
 </template>

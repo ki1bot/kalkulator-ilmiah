@@ -9,11 +9,28 @@ export type ButtonKind =
   | "equals"
   | "memory";
 
+export type CalculatorAction =
+  | "toggle-angle"
+  | "clear"
+  | "clear-entry"
+  | "backspace"
+  | "calculate"
+  | "toggle-sign"
+  | "answer"
+  | "square"
+  | "cube"
+  | "reciprocal"
+  | "memory-clear"
+  | "memory-recall"
+  | "memory-add"
+  | "memory-subtract";
+
 export type CalculatorButton = {
   label: string;
-  value?: string;
   kind: ButtonKind;
-  action?: string;
+  input?: string;
+  action?: CalculatorAction;
+  ariaLabel?: string;
 };
 
 export type CalculatorButtonGroup = {
@@ -23,15 +40,11 @@ export type CalculatorButtonGroup = {
 };
 
 export type HistoryItem = {
+  id: string;
   expression: string;
   result: string;
   mode: AngleMode;
-};
-
-export type FeatureCard = {
-  title: string;
-  description: string;
-  points: string[];
+  createdAt: number;
 };
 
 export type ExampleCalculation = {
@@ -40,77 +53,3 @@ export type ExampleCalculation = {
   result: string;
   description: string;
 };
-
-export type ReferenceItem = {
-  title: string;
-  syntax: string;
-  description: string;
-  example: string;
-};
-
-export type OperatorSymbol = "+" | "-" | "×" | "÷" | "^" | "mod" | "neg";
-
-export type PostfixSymbol = "!" | "%";
-
-export type FunctionName =
-  | "sin"
-  | "cos"
-  | "tan"
-  | "asin"
-  | "acos"
-  | "atan"
-  | "sinh"
-  | "cosh"
-  | "tanh"
-  | "log"
-  | "ln"
-  | "sqrt"
-  | "cbrt"
-  | "abs"
-  | "exp"
-  | "floor"
-  | "ceil"
-  | "round";
-
-export type NumberToken = {
-  type: "number";
-  value: number;
-  raw: string;
-};
-
-export type ConstantToken = {
-  type: "constant";
-  value: number;
-  raw: string;
-};
-
-export type OperatorToken = {
-  type: "operator";
-  value: OperatorSymbol;
-  raw: string;
-};
-
-export type PostfixToken = {
-  type: "postfix";
-  value: PostfixSymbol;
-  raw: string;
-};
-
-export type FunctionToken = {
-  type: "function";
-  value: FunctionName;
-  raw: string;
-};
-
-export type ParenthesisToken = {
-  type: "leftParen" | "rightParen";
-  raw: string;
-};
-
-export type Token =
-  | NumberToken
-  | ConstantToken
-  | OperatorToken
-  | PostfixToken
-  | FunctionToken
-  | ParenthesisToken;

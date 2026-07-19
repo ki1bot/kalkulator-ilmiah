@@ -1,5 +1,47 @@
-# Vue 3 + TypeScript + Vite
+# Kalkulator Ilmiah
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Website kalkulator ilmiah berbasis Vue 3, TypeScript, Vite, Tailwind CSS, tokenizer, parser Reverse Polish Notation, dan evaluator matematika mandiri tanpa `eval`.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Fitur
+
+- Operasi tambah, kurang, kali, bagi, modulo, dan kurung
+- Pangkat, akar kuadrat, akar pangkat tiga, dan faktorial
+- Persentase biasa dan persentase kontekstual
+- Trigonometri dan inverse trigonometri
+- Fungsi hiperbolik
+- Mode DEG dan RAD
+- Logaritma basis 10, natural, dan basis 2
+- Eksponen, nilai mutlak, floor, ceil, dan round
+- Konstanta π dan e
+- Perkalian implisit seperti `2π`, `2(3+4)`, dan `(2)(3)`
+- Memory clear, recall, add, dan subtract
+- Last answer
+- Riwayat perhitungan menggunakan localStorage
+- Input melalui tombol, keyboard, dan kolom ekspresi
+- Validasi pembagian nol, domain fungsi, tanda kurung, operator, dan angka
+- Tampilan responsif
+
+## Instalasi
+
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+## Pemeriksaan TypeScript
+
+```bash
+npm run type-check
+```
+
+## Build Produksi
+
+```bash
+npm run build
+npm run preview
+```

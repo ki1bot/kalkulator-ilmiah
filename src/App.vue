@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import CalculatorShell from "./components/CalculatorShell.vue";
+import CalculatorApp from "./components/CalculatorApp.vue";
 </script>
 
 <template>
-  <CalculatorShell />
+  <CalculatorApp />
 </template>

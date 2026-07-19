@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useCalculator } from "../composables/useCalculator";
-import AppHeader from "./AppHeader.vue";
 import CalculatorDisplay from "./CalculatorDisplay.vue";
 import CalculatorKeypad from "./CalculatorKeypad.vue";
 import HistoryPanel from "./HistoryPanel.vue";
-import InformationPanel from "./InformationPanel.vue";
 
 const {
   expression,
@@ -23,7 +21,6 @@ const {
   handleButtonClick,
   clearHistory,
   selectHistoryResult,
-  loadExpression,
   copyResult,
   toggleAngleMode,
 } = useCalculator();
@@ -32,63 +29,62 @@ const {
 <template>
   <main class="page-shell">
     <div class="page-container">
-      <AppHeader />
+      <header class="simple-header">
+        <div>
+          <h1>Kalkulator Ilmiah</h1>
+          <p>Perhitungan dasar dan ilmiah dalam satu kalkulator.</p>
+        </div>
+      </header>
 
-      <section class="status-grid" aria-label="Status kalkulator">
-        <article class="status-card">
-          <span>Mode sudut</span>
-          <strong>{{ angleMode }}</strong>
-        </article>
+      <section class="calculator-card">
+        <div class="calculator-status">
+          <button
+            type="button"
+            class="status-button"
+            aria-label="Ubah mode sudut"
+            @click="toggleAngleMode"
+          >
+            <span>Mode</span>
+            <strong>{{ angleMode }}</strong>
+          </button>
 
-        <article class="status-card">
-          <span>Memori</span>
-          <strong>{{ formattedMemory }}</strong>
-        </article>
+          <div class="status-item" :class="{ active: memoryActive }">
+            <span>Memori</span>
+            <strong>{{ formattedMemory }}</strong>
+          </div>
 
-        <article class="status-card">
-          <span>Jawaban terakhir</span>
-          <strong>{{ lastAnswer }}</strong>
-        </article>
+          <div class="status-item">
+            <span>ANS</span>
+            <strong>{{ lastAnswer }}</strong>
+          </div>
+        </div>
+
+        <CalculatorDisplay
+          :expression="expression"
+          :last-expression="lastExpression"
+          :preview="livePreview"
+          :error-message="errorMessage"
+          :status-message="statusMessage"
+          @update:expression="setExpression"
+          @calculate="calculateNow"
+          @clear="clearAll"
+          @copy="copyResult"
+        />
+
+        <CalculatorKeypad
+          :memory-active="memoryActive"
+          @press="handleButtonClick"
+        />
       </section>
 
-      <div class="workspace-grid">
-        <section class="calculator-card">
-          <CalculatorDisplay
-            :expression="expression"
-            :last-expression="lastExpression"
-            :preview="livePreview"
-            :error-message="errorMessage"
-            :status-message="statusMessage"
-            @update:expression="setExpression"
-            @calculate="calculateNow"
-            @clear="clearAll"
-            @copy="copyResult"
-          />
-
-          <CalculatorKeypad
-            :angle-mode="angleMode"
-            :memory-active="memoryActive"
-            @press="handleButtonClick"
-            @toggle-angle="toggleAngleMode"
-          />
-        </section>
-
-        <aside class="sidebar">
-          <HistoryPanel
-            :history="history"
-            @select="selectHistoryResult"
-            @clear="clearHistory"
-          />
-
-          <InformationPanel @use="loadExpression" />
-        </aside>
-      </div>
+      <HistoryPanel
+        :history="history"
+        @select="selectHistoryResult"
+        @clear="clearHistory"
+      />
 
       <footer class="page-footer">
-        <p>
-          Kalkulator memproses ekspresi dengan tokenizer, parser RPN, dan
-          evaluator tanpa menggunakan eval.
-        </p>
+        <p>Vue 3 · TypeScript · Vite</p>
       </footer>
     </div>
   </main>

@@ -21,48 +21,57 @@ const formatTime = (timestamp: number) => {
 </script>
 
 <template>
-  <section class="side-panel">
-    <div class="panel-heading-row">
-      <div>
-        <p class="eyebrow">Riwayat</p>
-        <h2>Perhitungan terakhir</h2>
+  <details class="history-panel">
+    <summary class="history-summary">
+      <span class="history-title">
+        <strong>Riwayat</strong>
+        <small>Perhitungan sebelumnya</small>
+      </span>
+
+      <span class="history-count">
+        {{ history.length }}
+      </span>
+    </summary>
+
+    <div class="history-content">
+      <div class="history-toolbar">
+        <p>Pilih hasil untuk menggunakannya kembali.</p>
+
+        <button
+          type="button"
+          class="small-button"
+          :disabled="history.length === 0"
+          @click="emit('clear')"
+        >
+          Hapus semua
+        </button>
       </div>
 
-      <button
-        type="button"
-        class="small-button"
-        :disabled="history.length === 0"
-        @click="emit('clear')"
-      >
-        Hapus
-      </button>
-    </div>
+      <div v-if="history.length" class="history-list">
+        <button
+          v-for="item in history"
+          :key="item.id"
+          type="button"
+          class="history-item"
+          @click="emit('select', item)"
+        >
+          <span class="history-meta">
+            <strong>{{ item.mode }}</strong>
 
-    <div v-if="history.length" class="history-list">
-      <button
-        v-for="item in history"
-        :key="item.id"
-        type="button"
-        class="history-item"
-        @click="emit('select', item)"
-      >
-        <span class="history-meta">
-          <strong>{{ item.mode }}</strong>
-          <span>
-            {{ formatTime(item.createdAt) }}
+            <span>
+              {{ formatTime(item.createdAt) }}
+            </span>
           </span>
-        </span>
 
-        <span class="history-expression">
-          {{ item.expression }}
-        </span>
+          <span class="history-expression">
+            {{ item.expression }}
+          </span>
 
-        <span class="history-result"> = {{ item.result }} </span>
-      </button>
+          <span class="history-result"> = {{ item.result }} </span>
+        </button>
+      </div>
+
+      <div v-else class="empty-state">Belum ada riwayat perhitungan.</div>
     </div>
-
-    <div v-else class="empty-state">
-      Riwayat masih kosong. Hasil akan tersimpan otomatis di perangkat ini.
-    </div>
-  </section>
+  </details>
 </template>

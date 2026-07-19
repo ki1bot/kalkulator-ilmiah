@@ -23,22 +23,28 @@ const handleInput = (event: Event) => {
 
 <template>
   <section class="calculator-display" aria-label="Layar kalkulator">
-    <div class="display-toolbar">
-      <div>
-        <p class="eyebrow">Ekspresi</p>
-
-        <p class="previous-expression">
-          {{ lastExpression ? `${lastExpression} =` : "Masukkan perhitungan" }}
-        </p>
-      </div>
+    <div class="display-header">
+      <p class="previous-expression">
+        {{ lastExpression ? `${lastExpression} =` : "Masukkan ekspresi" }}
+      </p>
 
       <div class="display-actions">
-        <button type="button" class="small-button" @click="emit('copy')">
+        <button
+          type="button"
+          class="display-action-button"
+          aria-label="Salin hasil"
+          @click="emit('copy')"
+        >
           Salin
         </button>
 
-        <button type="button" class="small-button" @click="emit('clear')">
-          Bersihkan
+        <button
+          type="button"
+          class="display-action-button"
+          aria-label="Hapus semua"
+          @click="emit('clear')"
+        >
+          Hapus
         </button>
       </div>
     </div>
@@ -58,7 +64,9 @@ const handleInput = (event: Event) => {
 
     <div class="display-feedback" aria-live="polite">
       <p :class="errorMessage ? 'feedback-error' : 'feedback-status'">
-        {{ errorMessage || statusMessage || "Enter atau = untuk menghitung" }}
+        {{
+          errorMessage || statusMessage || "Tekan Enter atau = untuk menghitung"
+        }}
       </p>
 
       <p class="preview-result">

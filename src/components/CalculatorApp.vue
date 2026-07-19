@@ -5,6 +5,8 @@ import CalculatorDisplay from "./CalculatorDisplay.vue";
 import CalculatorKeypad from "./CalculatorKeypad.vue";
 import HistoryPanel from "./HistoryPanel.vue";
 
+const currentYear = new Date().getFullYear();
+
 const {
   expression,
   angleMode,
@@ -241,7 +243,7 @@ onBeforeUnmount(() => {
       />
 
       <footer class="py-4 text-center text-xs text-zinc-400">
-        <p>&copy; 2026 Kibot. All rights reserved.</p>
+        <p>© {{ currentYear }} Kibot. All rights reserved.</p>
       </footer>
     </div>
   </main>

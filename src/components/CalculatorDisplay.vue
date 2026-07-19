@@ -30,26 +30,6 @@ const handleInput = (event: Event) => {
       <p class="min-w-0 truncate font-mono text-xs text-zinc-400">
         {{ lastExpression ? `${lastExpression} =` : "Masukkan ekspresi" }}
       </p>
-
-      <div class="flex shrink-0 gap-1">
-        <button
-          type="button"
-          class="touch-manipulation rounded-md border border-zinc-700 bg-zinc-800 px-2 py-1.5 text-xs font-semibold text-zinc-300 transition hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          aria-label="Salin hasil"
-          @click="emit('copy')"
-        >
-          Salin
-        </button>
-
-        <button
-          type="button"
-          class="touch-manipulation rounded-md border border-zinc-700 bg-zinc-800 px-2 py-1.5 text-xs font-semibold text-zinc-300 transition hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          aria-label="Hapus semua"
-          @click="emit('clear')"
-        >
-          Hapus
-        </button>
-      </div>
     </div>
 
     <input

@@ -241,7 +241,7 @@ onBeforeUnmount(() => {
       />
 
       <footer class="py-4 text-center text-xs text-zinc-400">
-        Vue 3 · TypeScript · Vite · Tailwind CSS
+        <p>&copy; 2026 Kibot. All rights reserved.</p>
       </footer>
     </div>
   </main>

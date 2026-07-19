@@ -7,7 +7,7 @@ import {
 } from "../data/buttons";
 import type { ButtonKind, CalculatorButton } from "../types/calculator";
 
-type MobilePanel = "basic" | "scientific";
+type CalculatorPanel = "basic" | "scientific";
 
 defineProps<{
   memoryActive: boolean;
@@ -17,7 +17,7 @@ const emit = defineEmits<{
   press: [button: CalculatorButton];
 }>();
 
-const activePanel = ref<MobilePanel>("basic");
+const activePanel = ref<CalculatorPanel>("basic");
 
 const baseButtonClass =
   "touch-manipulation min-h-11 rounded-lg border px-1 py-2 text-sm font-bold transition active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 sm:min-h-12";
@@ -40,7 +40,7 @@ const press = (button: CalculatorButton) => {
 <template>
   <section class="mt-2 sm:mt-3" aria-label="Tombol kalkulator">
     <nav
-      class="mb-2 grid grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 md:hidden"
+      class="mb-2 grid grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1"
       aria-label="Pilihan jenis tombol"
     >
       <button
@@ -49,7 +49,7 @@ const press = (button: CalculatorButton) => {
         :class="
           activePanel === 'basic'
             ? 'bg-white text-zinc-900 shadow-sm'
-            : 'text-zinc-500'
+            : 'text-zinc-500 hover:bg-zinc-200 hover:text-zinc-800'
         "
         :aria-pressed="activePanel === 'basic'"
         @click="activePanel = 'basic'"
@@ -63,7 +63,7 @@ const press = (button: CalculatorButton) => {
         :class="
           activePanel === 'scientific'
             ? 'bg-white text-zinc-900 shadow-sm'
-            : 'text-zinc-500'
+            : 'text-zinc-500 hover:bg-zinc-200 hover:text-zinc-800'
         "
         :aria-pressed="activePanel === 'scientific'"
         @click="activePanel = 'scientific'"
@@ -72,7 +72,7 @@ const press = (button: CalculatorButton) => {
       </button>
     </nav>
 
-    <div :class="activePanel === 'basic' ? 'block' : 'hidden md:block'">
+    <div v-show="activePanel === 'basic'">
       <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
         <span
           class="grid min-h-11 place-items-center rounded-lg border text-sm font-extrabold sm:min-h-12"
@@ -116,11 +116,7 @@ const press = (button: CalculatorButton) => {
       </div>
     </div>
 
-    <div
-      :class="
-        activePanel === 'scientific' ? 'grid gap-2' : 'hidden gap-2 md:grid'
-      "
-    >
+    <div v-show="activePanel === 'scientific'" class="grid gap-2">
       <section
         v-for="group in scientificButtonGroups"
         :key="group.title"
@@ -136,7 +132,9 @@ const press = (button: CalculatorButton) => {
           </p>
         </div>
 
-        <div class="grid grid-cols-3 gap-1.5 sm:grid-cols-6 sm:gap-2">
+        <div
+          class="grid grid-cols-3 gap-1.5 sm:grid-cols-4 sm:gap-2 md:grid-cols-6"
+        >
           <button
             v-for="button in group.buttons"
             :key="`${group.title}-${button.label}`"

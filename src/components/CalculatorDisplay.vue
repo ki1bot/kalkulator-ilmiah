@@ -22,16 +22,19 @@ const handleInput = (event: Event) => {
 </script>
 
 <template>
-  <section class="calculator-display" aria-label="Layar kalkulator">
-    <div class="display-header">
-      <p class="previous-expression">
+  <section
+    class="rounded-xl bg-zinc-900 p-3 text-white sm:p-4"
+    aria-label="Layar kalkulator"
+  >
+    <div class="flex items-center justify-between gap-2">
+      <p class="min-w-0 truncate font-mono text-xs text-zinc-400">
         {{ lastExpression ? `${lastExpression} =` : "Masukkan ekspresi" }}
       </p>
 
-      <div class="display-actions">
+      <div class="flex shrink-0 gap-1">
         <button
           type="button"
-          class="display-action-button"
+          class="touch-manipulation rounded-md border border-zinc-700 bg-zinc-800 px-2 py-1.5 text-xs font-semibold text-zinc-300 transition hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           aria-label="Salin hasil"
           @click="emit('copy')"
         >
@@ -40,7 +43,7 @@ const handleInput = (event: Event) => {
 
         <button
           type="button"
-          class="display-action-button"
+          class="touch-manipulation rounded-md border border-zinc-700 bg-zinc-800 px-2 py-1.5 text-xs font-semibold text-zinc-300 transition hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           aria-label="Hapus semua"
           @click="emit('clear')"
         >
@@ -51,7 +54,7 @@ const handleInput = (event: Event) => {
 
     <input
       :value="expression"
-      class="expression-input"
+      class="mt-4 w-full min-w-0 border-0 bg-transparent p-0 text-right font-mono text-3xl font-bold tracking-tight text-white outline-none sm:text-5xl"
       type="text"
       inputmode="text"
       autocomplete="off"
@@ -62,14 +65,20 @@ const handleInput = (event: Event) => {
       @keydown.esc.prevent="emit('clear')"
     />
 
-    <div class="display-feedback" aria-live="polite">
-      <p :class="errorMessage ? 'feedback-error' : 'feedback-status'">
+    <div
+      class="mt-3 flex min-h-8 flex-col justify-between gap-1 border-t border-zinc-700 pt-3 sm:flex-row sm:items-center sm:gap-3"
+    >
+      <p
+        class="text-xs"
+        :class="errorMessage ? 'font-semibold text-rose-300' : 'text-zinc-400'"
+        aria-live="polite"
+      >
         {{
           errorMessage || statusMessage || "Tekan Enter atau = untuk menghitung"
         }}
       </p>
 
-      <p class="preview-result">
+      <p class="shrink-0 text-right font-mono text-sm font-bold text-blue-300">
         {{ preview ? `= ${preview}` : "" }}
       </p>
     </div>

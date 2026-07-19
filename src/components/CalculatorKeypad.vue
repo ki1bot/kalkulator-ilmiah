@@ -19,14 +19,17 @@ const emit = defineEmits<{
 
 const activePanel = ref<MobilePanel>("basic");
 
+const baseButtonClass =
+  "touch-manipulation min-h-11 rounded-lg border px-1 py-2 text-sm font-bold transition active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 sm:min-h-12";
+
 const buttonClasses: Record<ButtonKind, string> = {
-  number: "key key-number",
-  operator: "key key-operator",
-  function: "key key-function",
-  constant: "key key-constant",
-  action: "key key-action",
-  equals: "key key-equals",
-  memory: "key key-memory",
+  number: "border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-100",
+  operator: "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100",
+  function: "border-zinc-200 bg-zinc-100 text-zinc-700 hover:bg-zinc-200",
+  constant: "border-zinc-200 bg-zinc-100 text-zinc-700 hover:bg-zinc-200",
+  action: "border-zinc-300 bg-zinc-200 text-zinc-700 hover:bg-zinc-300",
+  equals: "border-zinc-900 bg-zinc-900 text-white hover:bg-zinc-800",
+  memory: "border-zinc-200 bg-zinc-100 text-zinc-700 hover:bg-zinc-200",
 };
 
 const press = (button: CalculatorButton) => {
@@ -35,13 +38,20 @@ const press = (button: CalculatorButton) => {
 </script>
 
 <template>
-  <section class="keypad" aria-label="Tombol kalkulator">
-    <nav class="mobile-keypad-tabs" aria-label="Pilihan jenis tombol">
+  <section class="mt-2 sm:mt-3" aria-label="Tombol kalkulator">
+    <nav
+      class="mb-2 grid grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 md:hidden"
+      aria-label="Pilihan jenis tombol"
+    >
       <button
         type="button"
-        :class="{
-          active: activePanel === 'basic',
-        }"
+        class="touch-manipulation rounded-md px-3 py-2 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+        :class="
+          activePanel === 'basic'
+            ? 'bg-white text-zinc-900 shadow-sm'
+            : 'text-zinc-500'
+        "
+        :aria-pressed="activePanel === 'basic'"
         @click="activePanel = 'basic'"
       >
         Dasar
@@ -49,25 +59,28 @@ const press = (button: CalculatorButton) => {
 
       <button
         type="button"
-        :class="{
-          active: activePanel === 'scientific',
-        }"
+        class="touch-manipulation rounded-md px-3 py-2 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+        :class="
+          activePanel === 'scientific'
+            ? 'bg-white text-zinc-900 shadow-sm'
+            : 'text-zinc-500'
+        "
+        :aria-pressed="activePanel === 'scientific'"
         @click="activePanel = 'scientific'"
       >
         Ilmiah
       </button>
     </nav>
 
-    <div
-      class="keypad-section basic-keypad-section"
-      :class="{
-        'mobile-section-hidden': activePanel !== 'basic',
-      }"
-    >
-      <div class="memory-row">
+    <div :class="activePanel === 'basic' ? 'block' : 'hidden md:block'">
+      <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
         <span
-          class="memory-indicator"
-          :class="{ active: memoryActive }"
+          class="grid min-h-11 place-items-center rounded-lg border text-sm font-extrabold sm:min-h-12"
+          :class="
+            memoryActive
+              ? 'border-violet-300 bg-violet-50 text-violet-700'
+              : 'border-zinc-200 bg-zinc-50 text-zinc-400'
+          "
           aria-label="Indikator memori"
         >
           M
@@ -77,7 +90,7 @@ const press = (button: CalculatorButton) => {
           v-for="button in memoryButtons"
           :key="button.label"
           type="button"
-          :class="buttonClasses[button.kind]"
+          :class="[baseButtonClass, buttonClasses[button.kind]]"
           :aria-label="button.ariaLabel || button.label"
           @click="press(button)"
         >
@@ -85,12 +98,16 @@ const press = (button: CalculatorButton) => {
         </button>
       </div>
 
-      <div class="primary-grid">
+      <div class="mt-2 grid grid-cols-4 gap-1.5 sm:gap-2">
         <button
           v-for="button in primaryButtons"
           :key="button.label"
           type="button"
-          :class="buttonClasses[button.kind]"
+          :class="[
+            baseButtonClass,
+            buttonClasses[button.kind],
+            'min-h-14 text-base sm:min-h-16',
+          ]"
           :aria-label="button.ariaLabel || button.label"
           @click="press(button)"
         >
@@ -100,27 +117,31 @@ const press = (button: CalculatorButton) => {
     </div>
 
     <div
-      class="keypad-section scientific-keypad-section"
-      :class="{
-        'mobile-section-hidden': activePanel !== 'scientific',
-      }"
+      :class="
+        activePanel === 'scientific' ? 'grid gap-2' : 'hidden gap-2 md:grid'
+      "
     >
       <section
         v-for="group in scientificButtonGroups"
         :key="group.title"
-        class="scientific-group"
+        class="rounded-xl border border-zinc-200 bg-zinc-50 p-2 sm:p-3"
       >
-        <div class="scientific-group-header">
-          <h2>{{ group.title }}</h2>
-          <p>{{ group.description }}</p>
+        <div class="mb-2">
+          <h2 class="text-sm font-bold text-zinc-800">
+            {{ group.title }}
+          </h2>
+
+          <p class="mt-0.5 text-xs leading-5 text-zinc-500">
+            {{ group.description }}
+          </p>
         </div>
 
-        <div class="scientific-grid">
+        <div class="grid grid-cols-3 gap-1.5 sm:grid-cols-6 sm:gap-2">
           <button
             v-for="button in group.buttons"
             :key="`${group.title}-${button.label}`"
             type="button"
-            :class="buttonClasses[button.kind]"
+            :class="[baseButtonClass, buttonClasses[button.kind]]"
             :aria-label="button.ariaLabel || button.label"
             @click="press(button)"
           >

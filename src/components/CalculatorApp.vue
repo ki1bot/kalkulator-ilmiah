@@ -59,20 +59,18 @@ const handleEscape = (event: KeyboardEvent) => {
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
-
   document.addEventListener("keydown", handleEscape);
 });
 
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleDocumentClick);
-
   document.removeEventListener("keydown", handleEscape);
 });
 </script>
 
 <template>
   <main
-    class="relative min-h-screen bg-zinc-100 px-3 py-4 text-zinc-900 sm:px-4 sm:py-8"
+    class="relative flex min-h-screen flex-col bg-zinc-100 px-3 text-zinc-900 sm:px-4"
   >
     <div
       ref="profileMenuRef"
@@ -152,7 +150,7 @@ onBeforeUnmount(() => {
       </Transition>
     </div>
 
-    <div class="mx-auto w-full max-w-3xl pt-12 sm:pt-8">
+    <div class="mx-auto flex w-full max-w-3xl flex-1 flex-col pt-16">
       <header class="mb-4 text-center sm:mb-6">
         <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
           Kalkulator Ilmiah
@@ -242,7 +240,9 @@ onBeforeUnmount(() => {
         @clear="clearHistory"
       />
 
-      <footer class="py-4 text-center text-xs text-zinc-400">
+      <footer
+        class="mt-auto flex min-h-20 w-full items-center justify-center py-6 text-center text-sm font-medium text-zinc-500"
+      >
         <p>© {{ currentYear }} Kibot. All rights reserved.</p>
       </footer>
     </div>
